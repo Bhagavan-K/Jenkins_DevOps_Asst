@@ -107,6 +107,32 @@
         .resource-list li:last-child {
             border-bottom: none;
         }
+        .build-info {
+            background-color: #e9ecef;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        .build-info h3 {
+            margin-top: 0;
+            color: #29539b;
+        }
+        .env-label {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        .env-staging {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        .env-production {
+            background-color: #d4edda;
+            color: #155724;
+        }
         @media (max-width: 768px) {
             .dashboard {
                 grid-template-columns: 1fr;
@@ -166,6 +192,7 @@
                     <li><strong>Database Clusters:</strong> 3 primary, 2 replica</li>
                     <li><strong>Storage:</strong> 68% utilized</li>
                     <li><strong>Containers:</strong> 47 running</li>
+                    <li><strong>Jenkins Agents:</strong> 3 connected</li>
                 </ul>
             </div>
         </div>
@@ -182,12 +209,24 @@
                 into the main branch. Automated deployment scripts help maintain consistency across environments
                 and reduce the risk of human error during releases.
             </p>
+            
+            <div class="build-info">
+                <h3>Environment Status</h3>
+                <p>
+                    <span class="env-label env-staging">Staging</span> Last updated: April 10, 2025, 14:37 PM
+                    <br>
+                    <span class="env-label env-production">Production</span> Last updated: April 9, 2025, 18:22 PM
+                </p>
+                <p id="buildNumber">Build information will be populated by CI/CD pipeline</p>
+            </div>
         </div>
     </div>
 
     <footer>
         <p>DevOps Automation Dashboard | Last Updated: April 10, 2025</p>
-        <p>Created for demonstration purposes - 2023TM93657</p>
+        <p>Master-Slave Architecture Demo</p>
     </footer>
+    
+    <script src="test.js"></script>
 </body>
 </html>

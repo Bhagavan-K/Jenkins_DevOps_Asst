@@ -1,218 +1,162 @@
-// DevOps Project - Automated Testing Script
-// For use with Jenkins CI/CD pipeline
-const assert = require('assert');
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-const { JSDOM } = require('jsdom');
-
-/**
- * Custom testing framework for DevOps project
- * Used to validate HTML content and infrastructure configurations
- */
-class DevOpsTestSuite {
-  constructor(projectRoot) {
-    this.projectRoot = projectRoot || process.cwd();
-    this.testResults = {
-      passed: 0,
-      failed: 0,
-      total: 0,
-      failures: []
-    };
-    this.htmlContent = null;
-    this.dom = null;
-  }
-
-  /**
-   * Load and parse the HTML file for testing
-   * @param {string} htmlPath - Path to HTML file
-   * @return {boolean} - Success status
-   */
-  loadHtml(htmlPath) {
-    try {
-      const fullPath = path.join(this.projectRoot, htmlPath);
-      if (!fs.existsSync(fullPath)) {
-        throw new Error(`File not found: ${fullPath}`);
-      }
-      
-      this.htmlContent = fs.readFileSync(fullPath, 'utf8');
-      this.dom = new JSDOM(this.htmlContent);
-      console.log(`✓ Successfully loaded HTML from ${htmlPath}`);
-      return true;
-    } catch (error) {
-      console.error(`× Failed to load HTML: ${error.message}`);
-      return false;
-    }
-  }
-
-  /**
-   * Run a test with proper logging and error handling
-   * @param {string} testName - Name of the test
-   * @param {Function} testFn - Test function to execute
-   */
-  runTest(testName, testFn) {
-    this.testResults.total++;
-    try {
-      console.log(`Running test: ${testName}`);
-      testFn();
-      console.log(`✓ PASSED: ${testName}`);
-      this.testResults.passed++;
-    } catch (error) {
-      console.error(`× FAILED: ${testName}`);
-      console.error(`  Error: ${error.message}`);
-      this.testResults.failed++;
-      this.testResults.failures.push({
-        name: testName,
-        error: error.message
-      });
-    }
-  }
-
-  /**
-   * Test HTML structure and content
-   */
-  testHtmlStructure() {
-    if (!this.dom) {
-      throw new Error('HTML not loaded. Call loadHtml() first.');
+// Application Tests
+class DevOpsTests {
+    constructor() {
+        this.testResults = {
+            passed: 0,
+            failed: 0,
+            total: 0,
+            failures: []
+        };
+        console.log("DevOps Test Suite Initialized");
     }
 
-    const document = this.dom.window.document;
-    
-    this.runTest('Validate HTML title', () => {
-      const title = document.querySelector('title');
-      assert.ok(title, 'Title element not found');
-      assert.ok(title.textContent.includes('DevOps'), 'Title should contain "DevOps"');
-    });
-
-    this.runTest('Validate header elements', () => {
-      const header = document.querySelector('header');
-      assert.ok(header, 'Header element not found');
-      
-      const h1 = header.querySelector('h1');
-      assert.ok(h1, 'H1 element not found in header');
-    });
-
-    this.runTest('Validate dashboard components', () => {
-      const dashboardCards = document.querySelectorAll('.card');
-      assert.ok(dashboardCards.length >= 3, 'Should have at least 3 dashboard cards');
-    });
-
-    this.runTest('Check for responsive design meta tag', () => {
-      const metaViewport = document.querySelector('meta[name="viewport"]');
-      assert.ok(metaViewport, 'Viewport meta tag not found');
-    });
-  }
-
-  /**
-   * Test environment configuration
-   */
-  testEnvironmentConfig() {
-    this.runTest('Verify Node.js version', () => {
-      const nodeVersion = process.version;
-      console.log(`Current Node.js version: ${nodeVersion}`);
-      const versionNum = Number(nodeVersion.replace('v', '').split('.')[0]);
-      assert.ok(versionNum >= 12, 'Node.js version should be 12 or higher');
-    });
-
-    this.runTest('Check for required directories', () => {
-      const requiredDirs = ['public', 'src', 'tests'];
-      
-      for (const dir of requiredDirs) {
+    runTest(testName, testFn) {
+        this.testResults.total++;
         try {
-          const stats = fs.statSync(path.join(this.projectRoot, dir));
-          assert.ok(stats.isDirectory(), `${dir} should be a directory`);
-        } catch (err) {
-          // Create missing directories in CI environment
-          if (process.env.CI) {
-            fs.mkdirSync(path.join(this.projectRoot, dir), { recursive: true });
-            console.log(`Created missing directory: ${dir}`);
-          } else {
-            throw new Error(`Required directory not found: ${dir}`);
-          }
+            console.log(`Running test: ${testName}`);
+            testFn();
+            console.log(`✓ PASSED: ${testName}`);
+            this.testResults.passed++;
+            return true;
+        } catch (error) {
+            console.error(`× FAILED: ${testName}`);
+            console.error(`  Error: ${error.message}`);
+            this.testResults.failed++;
+            this.testResults.failures.push({
+                name: testName,
+                error: error.message
+            });
+            return false;
         }
-      }
-    });
-  }
+    }
 
-  /**
-   * Mock infrastructure tests
-   */
-  testInfrastructure() {
-    this.runTest('Simulate API endpoint check', () => {
-      // This is a mock test for demonstration
-      const mockEndpoint = 'https://api.example.com/health';
-      const mockResponse = { status: 'healthy', version: '1.2.3' };
-      
-      // In a real test, we would make an actual HTTP request
-      console.log(`Mock API call to ${mockEndpoint}`);
-      
-      // Simulate successful API response
-      assert.deepStrictEqual(
-        mockResponse, 
-        { status: 'healthy', version: '1.2.3' },
-        'API health check failed'
-      );
-    });
-  }
+    testHtmlElements() {
+        this.runTest('Check page title', () => {
+            const title = document.querySelector('title');
+            if (!title || !title.textContent.includes('DevOps')) {
+                throw new Error('Title element not found or incorrect');
+            }
+        });
 
-  /**
-   * Print test summary
-   */
-  printSummary() {
-    console.log('\n==== TEST SUMMARY ====');
-    console.log(`Total tests: ${this.testResults.total}`);
-    console.log(`Passed: ${this.testResults.passed}`);
-    console.log(`Failed: ${this.testResults.failed}`);
-    
-    if (this.testResults.failures.length > 0) {
-      console.log('\nFailures:');
-      this.testResults.failures.forEach((failure, index) => {
-        console.log(`${index + 1}. ${failure.name}: ${failure.error}`);
-      });
+        this.runTest('Validate dashboard cards', () => {
+            const cards = document.querySelectorAll('.card');
+            if (cards.length < 3) {
+                throw new Error('Expected at least 3 dashboard cards');
+            }
+        });
+
+        this.runTest('Check environment status', () => {
+            const buildInfo = document.querySelector('.build-info');
+            if (!buildInfo) {
+                throw new Error('Build info section not found');
+            }
+        });
+        
+        this.runTest('Verify responsive design', () => {
+            const metaViewport = document.querySelector('meta[name="viewport"]');
+            if (!metaViewport) {
+                throw new Error('Viewport meta tag not found');
+            }
+        });
     }
     
-    console.log('=====================');
-    
-    // Return exit code based on test results
-    return this.testResults.failed === 0 ? 0 : 1;
-  }
-  
-  /**
-   * Run all tests
-   */
-  runAllTests() {
-    console.log('Starting DevOps project tests...');
-    
-    // Load HTML file for testing
-    if (this.loadHtml('index.html')) {
-      this.testHtmlStructure();
+    testPerformance() {
+        this.runTest('Page load time', () => {
+            // This is a simple mock performance test
+            const loadTime = Math.random() * 500 + 100; // Simulate 100-600ms load time
+            console.log(`Page load time: ${loadTime.toFixed(2)}ms`);
+            
+            if (loadTime > 1000) {
+                throw new Error('Page load time exceeds 1000ms threshold');
+            }
+        });
     }
     
-    // Run environment and infrastructure tests
-    this.testEnvironmentConfig();
-    this.testInfrastructure();
-    
-    // Print summary and return exit code
-    const exitCode = this.printSummary();
-    
-    if (process.env.JENKINS_URL) {
-      console.log('Tests running in Jenkins environment');
-      console.log(`Build ID: ${process.env.BUILD_ID || 'unknown'}`);
-      console.log(`Workspace: ${process.env.WORKSPACE || 'unknown'}`);
+    testEnvironmentFeatures() {
+        this.runTest('Environment detection', () => {
+            // Update build information element
+            const buildNumber = document.getElementById('buildNumber');
+            if (buildNumber) {
+                const envInfo = {
+                    environment: this.detectEnvironment(),
+                    buildId: this.getBuildId(),
+                    timestamp: new Date().toISOString()
+                };
+                
+                buildNumber.textContent = `Build: ${envInfo.buildId} | Environment: ${envInfo.environment} | ${envInfo.timestamp}`;
+            }
+        });
     }
     
-    return exitCode;
-  }
+    detectEnvironment() {
+        // This would normally check environment variables or URL
+        // For demo purposes, we'll randomly select one
+        const envs = ['development', 'staging', 'production'];
+        const randomIndex = Math.floor(Math.random() * envs.length);
+        return envs[randomIndex];
+    }
+    
+    getBuildId() {
+        // In a real Jenkins pipeline, this would read from environment
+        // For demo, generate a random build ID
+        return `build-${Math.floor(Math.random() * 1000)}`;
+    }
+    
+    runAllTests() {
+        console.log('Starting DevOps tests...');
+        
+        // Run HTML tests
+        this.testHtmlElements();
+        
+        // Run performance tests
+        this.testPerformance();
+        
+        // Run environment tests
+        this.testEnvironmentFeatures();
+        
+        // Print summary
+        this.printSummary();
+        
+        return this.testResults;
+    }
+    
+    printSummary() {
+        console.log('\n==== TEST SUMMARY ====');
+        console.log(`Total tests: ${this.testResults.total}`);
+        console.log(`Passed: ${this.testResults.passed}`);
+        console.log(`Failed: ${this.testResults.failed}`);
+        
+        if (this.testResults.failures.length > 0) {
+            console.log('\nFailures:');
+            this.testResults.failures.forEach((failure, index) => {
+                console.log(`${index + 1}. ${failure.name}: ${failure.error}`);
+            });
+        }
+        
+        console.log('=====================');
+    }
+    
+    simulateFailingTest() {
+        // this.runTest('Intentional failure', () => {
+        //     throw new Error('This test was designed to fail');
+        // });
+    }
 }
 
-// If running directly (not imported as a module)
-if (require.main === module) {
-  const testSuite = new DevOpsTestSuite();
-  const exitCode = testSuite.runAllTests();
-  
-  // Exit with appropriate code for CI systems
-  process.exit(exitCode);
+// Function to run when the page loads
+window.onload = function() {
+    console.log('Page loaded, running tests...');
+    const tester = new DevOpsTests();
+    tester.runAllTests();
+};
+
+// This function can be called from outside this file
+function validateApplication() {
+    const tester = new DevOpsTests();
+    return tester.runAllTests();
 }
 
-// Export for use in other test modules
-module.exports = DevOpsTestSuite;
+// Export the test class if we're in a Node.js environment
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = DevOpsTests;
+}

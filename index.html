@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Automation Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background: linear-gradient(135deg, #2a3b8f 0%, #29539b 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .tagline {
+            font-style: italic;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            color: #29539b;
+            margin-top: 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 0.5rem;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .metric {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .metric-label {
+            flex: 1;
+            font-weight: bold;
+        }
+        .metric-value {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+        .status-good {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .status-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .pipeline-status {
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        .resource-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .resource-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .resource-list li:last-child {
+            border-bottom: none;
+        }
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DevOps Automation Dashboard</h1>
+        <p class="tagline">Real-time monitoring & deployment insights</p>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="card">
+                <h2>System Health</h2>
+                <div class="metric">
+                    <span class="metric-label">CI/CD Pipeline</span>
+                    <span class="metric-value status-good">Operational</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Deployment Status</span>
+                    <span class="metric-value status-good">Stable</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Test Coverage</span>
+                    <span class="metric-value status-warning">87%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Infrastructure</span>
+                    <span class="metric-value status-good">Optimized</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Recent Deployments</h2>
+                <div class="pipeline-status">
+                    <strong>Release v2.4.7</strong> - Deployed 2 hours ago
+                    <div>Status: Successful</div>
+                </div>
+                <div class="pipeline-status">
+                    <strong>Hotfix #3291</strong> - Deployed 1 day ago
+                    <div>Status: Successful</div>
+                </div>
+                <div class="pipeline-status">
+                    <strong>Feature #87</strong> - Deployed 3 days ago
+                    <div>Status: Failed - <a href="#">View Logs</a></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Infrastructure Resources</h2>
+                <ul class="resource-list">
+                    <li><strong>Production Servers:</strong> 12 instances (8 active)</li>
+                    <li><strong>Development Environments:</strong> 5 instances</li>
+                    <li><strong>Database Clusters:</strong> 3 primary, 2 replica</li>
+                    <li><strong>Storage:</strong> 68% utilized</li>
+                    <li><strong>Containers:</strong> 47 running</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Project Overview</h2>
+            <p>
+                This DevOps automation project aims to streamline our development and deployment processes through 
+                CI/CD pipelines, infrastructure as code, and comprehensive testing strategies. The dashboard 
+                provides real-time insights into system health, deployment status, and resource utilization.
+            </p>
+            <p>
+                Our Jenkins integration ensures all code changes are thoroughly tested before being merged 
+                into the main branch. Automated deployment scripts help maintain consistency across environments
+                and reduce the risk of human error during releases.
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <p>DevOps Automation Dashboard | Last Updated: April 10, 2025</p>
+        <p>Created for demonstration purposes</p>
+    </footer>
+</body>
+</html>

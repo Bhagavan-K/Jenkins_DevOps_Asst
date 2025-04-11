@@ -1,0 +1,489 @@
+Started by user Bhagavan K
+Obtained Jenkinsfile from git https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+[Pipeline] Start of Pipeline
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+ > git.exe rev-list --no-walk 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Checking out from source control...
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Build ID: 3"  1>build-info.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Node: windows-slave"  1>>build-info.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Timestamp: 2025-04-10 18:49:41"  1>>build-info.txt 
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+[Pipeline] withEnv
+[Pipeline] {
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+[Pipeline] echo
+Building the application...
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>if not exist build mkdir build 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>copy index.html build\ 
+        1 file(s) copied.
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>copy test.js build\ 
+        1 file(s) copied.
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>copy build-info.txt build\ 
+        1 file(s) copied.
+[Pipeline] script
+[Pipeline] {
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo 3-20250410184945  1>build\version.txt 
+[Pipeline] echo
+Built version: 3-20250410184945
+[Pipeline] }
+[Pipeline] // script
+Post stage
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] echo
+Build completed successfully!
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Analysis)
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Running code analysis...
+[Pipeline] bat
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Running code quality checks..." 
+"Running code quality checks..."
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>if not exist reports mkdir reports 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Code analysis completed on 04/10/2025 18:49:49.86"  1>reports\analysis-report.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "No major issues found."  1>>reports\analysis-report.txt 
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Running tests...
+[Pipeline] bat
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>if not exist test-results mkdir test-results 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Test execution started at 04/10/2025 18:49:53.83"  1>test-results\test_results.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>REM Simulate running NodeJS tests 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Running unit tests..."  1>>test-results\test_results.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Running integration tests..."  1>>test-results\test_results.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "All tests passed"  1>>test-results\test_results.txt 
+[Pipeline] script
+[Pipeline] {
+[Pipeline] readFile
+[Pipeline] echo
+Test Results: "Test execution started at 04/10/2025 18:49:53.83" 
+"Running unit tests..." 
+"Running integration tests..." 
+"All tests passed" 
+
+[Pipeline] }
+[Pipeline] // script
+Post stage
+[Pipeline] echo
+Test stage completed
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Staging)
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Deploying to Staging environment...
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>if not exist staging mkdir staging 
+[Pipeline] bat
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>copy build\*.* staging\ 
+build\build-info.txt
+build\index.html
+build\test.js
+build\version.txt
+        4 file(s) copied.
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "ENVIRONMENT=STAGING"  1>staging\env.properties 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Configuring application for staging environment..." 
+"Configuring application for staging environment..."
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "stage.server=staging-server"  1>staging\config.properties 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "stage.db=staging-db"  1>>staging\config.properties 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "stage.api.url=https://api-staging.example.com"  1>>staging\config.properties 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Restarting services on staging environment..."  1>staging\deploy.log 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Staging deployment completed at 04/10/2025 18:49:59.36"  1>>staging\deploy.log 
+Post stage
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] echo
+Successfully deployed to Staging!
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Integration Tests on Staging)
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Running integration tests on staging environment...
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>if not exist test-results mkdir test-results 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Integration tests started at 04/10/2025 18:50:03.72"  1>test-results\staging-integration.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Testing endpoints on staging environment..."  1>>test-results\staging-integration.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "All integration tests passed"  1>>test-results\staging-integration.txt 
+[Pipeline] script
+[Pipeline] {
+[Pipeline] readFile
+[Pipeline] echo
+Integration Test Results: "Integration tests started at 04/10/2025 18:50:03.72" 
+"Testing endpoints on staging environment..." 
+"All integration tests passed" 
+
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Production)
+[Pipeline] input
+Deploy to production?
+Proceed or Abort
+Approved by Bhagavan K
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Deploying to Production environment...
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>if not exist production mkdir production 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>copy staging\*.* production\ 
+staging\build-info.txt
+staging\config.properties
+staging\deploy.log
+staging\env.properties
+staging\index.html
+staging\test.js
+staging\version.txt
+        7 file(s) copied.
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "ENVIRONMENT=PRODUCTION"  1>production\env.properties 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Configuring application for production environment..." 
+"Configuring application for production environment..."
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "prod.server=production-server"  1>production\config.properties 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "prod.db=production-db"  1>>production\config.properties 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "prod.api.url=https://api.example.com"  1>>production\config.properties 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Restarting services on production environment..."  1>production\deploy.log 
+[Pipeline] bat
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Production deployment completed at 04/10/2025 18:50:28.13"  1>>production\deploy.log 
+Post stage
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] echo
+Successfully deployed to Production!
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Smoke Test Production)
+[Pipeline] node
+Running on windows-slave in C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline
+[Pipeline] {
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential 44861fed-e542-4193-b1a7-7f98e9dbb764
+Fetching changes from the remote Git repository
+ > git.exe rev-parse --resolve-git-dir C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline\.git # timeout=10
+ > git.exe config remote.origin.url https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git # timeout=10
+Fetching upstream changes from https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.49.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/Bhagavan-K/Jenkins_DevOps_Asst.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 8b320234d3b82c474c569004820cf71e257c7c56 (refs/remotes/origin/main)
+Commit message: "Merge pull request #1 from Bhagavan-K/development"
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] echo
+Running smoke tests on production environment...
+[Pipeline] bat
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 8b320234d3b82c474c569004820cf71e257c7c56 # timeout=10
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>if not exist test-results mkdir test-results 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Smoke tests started at 04/10/2025 18:50:32.00"  1>test-results\production-smoke.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "Verifying critical features on production..."  1>>test-results\production-smoke.txt 
+
+C:\DevOps\jenkins_agent\workspace\2023tm93657-DevOps-Pipeline>echo "All smoke tests passed"  1>>test-results\production-smoke.txt 
+[Pipeline] script
+[Pipeline] {
+[Pipeline] readFile
+[Pipeline] echo
+Smoke Test Results: "Smoke tests started at 04/10/2025 18:50:32.00" 
+"Verifying critical features on production..." 
+"All smoke tests passed" 
+
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Pipeline execution complete
+[Pipeline] echo
+Pipeline executed successfully!
+[Pipeline] echo
+Sending success notification...
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] End of Pipeline
+Finished: SUCCESS

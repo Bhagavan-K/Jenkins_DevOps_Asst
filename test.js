@@ -137,9 +137,9 @@ class DevOpsTests {
     }
     
     simulateFailingTest() {
-        // this.runTest('Intentional failure', () => {
-        //     throw new Error('This test was designed to fail');
-        // });
+        this.runTest('Intentional failure', () => {
+            throw new Error('This test was designed to fail');
+        });
     }
 }
 

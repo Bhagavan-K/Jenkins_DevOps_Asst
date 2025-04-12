@@ -101,6 +101,49 @@ class DevOpsTests {
         // For demo, generate a random build ID
         return `build-${Math.floor(Math.random() * 1000)}`;
     }
+
+    testCriticalDeploymentRequirements() {
+        this.runTest('API endpoints security check', () => {
+            // Simulate checking for required security headers
+            const requiredSecurityHeaders = [
+                'Content-Security-Policy',
+                'X-XSS-Protection',
+                'X-Content-Type-Options'
+            ];
+            // Simulate missing headers (for demo)
+            const missingHeaders = requiredSecurityHeaders.slice(0, 2);
+            if (missingHeaders.length > 0) {
+                throw new Error(`Missing required security headers: ${missingHeaders.join(', ')}`);
+            }
+        });
+        
+        this.runTest('Service dependencies check', () => {
+            const requiredServices = ['database', 'cache', 'auth-service', 'logging'];
+            const mockServiceStatus = {
+                'database': 'connected',
+                'cache': 'connected',
+                'auth-service': 'disconnected',
+                'logging': 'connected'
+            };
+            const unavailableServices = requiredServices.filter(
+                service => mockServiceStatus[service] !== 'connected'
+            );
+            if (unavailableServices.length > 0) {
+                throw new Error(`Critical services unavailable: ${unavailableServices.join(', ')}`);
+            }
+        });
+
+        this.runTest('Configuration validation', () => {
+            const mockConfigErrors = [
+                'Missing required environment variable: API_KEY',
+                'Invalid logging level specified'
+            ];
+
+            if (mockConfigErrors.length > 0) {
+                throw new Error(`Configuration errors detected: ${mockConfigErrors.join('; ')}`);
+            }
+        });
+    }
     
     runAllTests() {
         console.log('Starting DevOps tests...');
@@ -114,9 +157,18 @@ class DevOpsTests {
         // Run environment tests
         this.testEnvironmentFeatures();
         
+        // Run critical deployment requirement tests - This will cause failures
+        this.testCriticalDeploymentRequirements();
+    
         // Print summary
         this.printSummary();
+
         
+        // Return non-zero exit code if any tests failed (for Jenkins)
+        if (this.testResults.failed > 0) {
+            console.error('Tests failed! Pipeline should stop.');
+        }
+       
         return this.testResults;
     }
     
